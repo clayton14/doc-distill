@@ -3,6 +3,7 @@ Reads pdf file and extracts info
 """
 import os
 import sys
+import pandas
 from PyPDF2 import PdfFileReader
 """
 Reads PDF file and extracts info
@@ -13,13 +14,11 @@ class Reader():
     def __init__(self, file=None,):
         self.file = file
         self.all_text = ""
+        self.title = ""
         self.text_on_page = []
         self.images = []
 
     def read(self):
-        """
-        returns text found on document
-        """
         try:
             with open(self.file, 'rb') as pdf_file:
                 print(f"[READING] {self.file}")
@@ -31,5 +30,8 @@ class Reader():
         except FileNotFoundError as err:
             print("[ERROR] file not found")
 
-    def extract_images():
+    def get_table(self, page_num):
+        pass
+
+    def summarize(self, text):
         pass

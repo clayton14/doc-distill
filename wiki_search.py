@@ -6,8 +6,7 @@ from wikipedia import PageError
 from wikipedia import DisambiguationError
 import warnings
 # TODO : make a more well rounded web scraping tool
-# add GUI maye
-# add google docs support
+# add google docs support (maybe)
 
 
 def search_wik(search_terms, num_sentance, output="out.txt"):
@@ -39,6 +38,7 @@ def search_wik(search_terms, num_sentance, output="out.txt"):
 
 
 # listh of this to to look up example x = ["minecraft", "Jacob Riis"]
+
 
 x = [
     "sprawl", "load bearing masonry"
