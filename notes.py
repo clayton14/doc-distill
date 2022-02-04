@@ -11,7 +11,7 @@ import warnings
 
     
 
-def main(search_terms, num_sentance, output="out.txt"):
+def searc_wik(search_terms, num_sentance, output="out.txt"):
     print("======Starting======")
     assert len(search_terms) != 0, "List is empty"
     # warnings.catch_warnings()
@@ -46,5 +46,5 @@ x = [
 ]
 
 if __name__ == "__main__":
-    main(x, 3, output="out.txt")
+    searc_wik(x, 3, output="out.txt")
 # earch_test()
