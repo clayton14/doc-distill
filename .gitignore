@@ -4,3 +4,4 @@ bin
 pyvenv.cfg
 TestDocs
 test.py
+__pycache__
