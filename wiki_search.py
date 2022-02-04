@@ -10,7 +10,7 @@ import warnings
 # add google docs support
 
 
-def searc_wik(search_terms, num_sentance, output="out.txt"):
+def search_wik(search_terms, num_sentance, output="out.txt"):
     print("======Starting======")
     assert len(search_terms) != 0, "List is empty"
     # warnings.catch_warnings()
@@ -45,5 +45,5 @@ x = [
 ]
 
 if __name__ == "__main__":
-    searc_wik(x, 3, output="out.txt")
+    search_wik(x, 3, output="out.txt")
 # earch_test()
