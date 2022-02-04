@@ -14,14 +14,18 @@ class Reader():
         self.images = []
 
     def read(self):
-        with open(self.file, 'rb') as pdf_file:
-            doc = PdfFileReader(pdf_file)
-            # if("not scaned"):
-            #     # PyPdf
-            #     pass
-            # else:
-            #     # use ocr
-            #     pass
+        try:
+            with open(self.file, 'rb') as pdf_file:
+                doc = PdfFileReader(pdf_file)
+
+                # if("not scaned"):
+                #     # PyPdf
+                #     pass
+                # else:
+                #     # use ocr
+                #     pass
+        except FileNotFoundError as err:
+            print("[ERROR] file not found")
 
     def extract_images():
         pass
