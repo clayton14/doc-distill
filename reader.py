@@ -5,9 +5,10 @@ import os
 import sys
 import string
 import pandas
+import numpy as np
 from PyPDF2 import PdfFileReader
 from nltk import sent_tokenize, word_tokenize
-from nltk.corpus import stopwords
+from transformers import pipeline
 
 
 class Reader():
@@ -46,14 +47,9 @@ class Reader():
         pass
 
     def summarize(self):
-        words = word_tokenize(self.all_text)
-        stop_words = set(stopwords.words("english"))
-        freqTable = {}
-        for word in words:
-            word = word.lower()
-            if(word in stop_words):
-                continue
-            if(word in freqTable):
-                freqTable[word] += 1
-            else:
-                freqTable[word] = 1
+        summory = ""
+        summorizer = pipeline("summarization")
+        for _, page in enumerate(self.text_on_page):
+            summory += summorizer(page, max_length=130,
+                                  min_length=30, do_sample=False)[0]['summary_text']
+        return summory
