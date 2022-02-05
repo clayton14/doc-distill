@@ -9,6 +9,7 @@ import numpy as np
 from PyPDF2 import PdfFileReader
 from nltk import sent_tokenize, word_tokenize
 from transformers import pipeline
+from transformers import TFAutoModelForSeq2SeqLM, AutoTokenizer
 
 
 class Reader():
@@ -47,9 +48,12 @@ class Reader():
         pass
 
     def summarize(self):
-        summory = ""
-        summorizer = pipeline("summarization")
+        summary = ""
+        model = TFAutoModelForSeq2SeqLM.from_pretrained("t5-base")
+        tokenizer = AutoTokenizer.from_pretrained("t5-base")
+        summorizer = pipeline(
+            "summarization", modle=model, tokenizer=tokenizer)
         for _, page in enumerate(self.text_on_page):
-            summory += summorizer(page, max_length=130,
+            summary += summorizer(page, max_length=130,
                                   min_length=30, do_sample=False)[0]['summary_text']
-        return summory
+        return summary
