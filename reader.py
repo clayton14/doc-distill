@@ -43,39 +43,32 @@ class Reader():
         return sent_tokenize(self.all_text)
 
     def find_emails(self):
-        regix = "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+"
         mail_list = []
+        regix = "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+"
         email_find = re.findall(regix, self.all_text)
-        for email in email_find:
-            if(email in mail_list):
-                continue
-            else:
-                mail_list.append(email)
-        return mail_list
+        if (email_find):
+            return email_find
+        else:
+            return []
 
-    def find_all_links(self):
+    def find_links(self):
         regix = "(http|ftp|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])"
         links = re.findall(regix, self.all_text)
-        if links:
+        if (links):
             return links
         else:
-            return "no URLs found"
+            return []
 
     def _clean(self):
-        pass
-        # mail = self.find_emails()
-        # links = self.find_all_links()
-        # words = word_tokenize(self.all_text.lower())
-        # cleanned = []
-        # for word in words:
-        #     if(word in mail or word in links):
-        #         continue
-        #     else:
-        #         cleanned.append(word)
-
-        # print(cleanned)
+        emails = self.find_emails()
+        links = self.find_emails()
+        for link in links:
+            self.all_text = self.all_text.replace(link, "")
+        for mail in emails:
+            self.all_text = self.all_text.replace(mail, "")
 
     def summarize(self, size):
+        self._clean()
         summary = ""
         stop_words = stopwords.words("english")
         words = word_tokenize(self.all_text.lower())
