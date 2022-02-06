@@ -10,6 +10,7 @@ from PyPDF2 import PdfFileReader
 from nltk import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 from nltk import FreqDist
+from heapq import nlargest
 
 
 class Reader():
@@ -18,9 +19,9 @@ class Reader():
         self.all_text = ""
         self.title = ""
         self.text_on_page = []
-        self.read()
+        self._read()
 
-    def read(self):
+    def _read(self):
         """
         Reads pdf file and extracts text
         """
@@ -60,7 +61,7 @@ class Reader():
         else:
             return "no URLs found"
 
-    def clean(self):
+    def _clean(self):
         pass
         # mail = self.find_emails()
         # links = self.find_all_links()
@@ -74,7 +75,7 @@ class Reader():
 
         # print(cleanned)
 
-    def summarize(self):
+    def summarize(self, size):
         summary = ""
         stop_words = stopwords.words("english")
         words = word_tokenize(self.all_text.lower())
@@ -101,4 +102,7 @@ class Reader():
                         sent_score[sent] = freq_table[word.lower()]
                     else:
                         sent_score[sent] += freq_table[word.lower()]
-        return sent_score
+        for i in range(size):
+            largest = nlargest(size, sent_score, key=sent_score.get)
+            summary += largest[i]
+        return summary.replace("\n", "")
