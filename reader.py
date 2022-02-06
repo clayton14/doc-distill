@@ -8,8 +8,8 @@ import pandas
 import re
 from PyPDF2 import PdfFileReader
 from nltk import sent_tokenize, word_tokenize
-from nltk.probability import ConditionalFreqDist
 from nltk.corpus import stopwords
+from nltk import FreqDist
 
 
 class Reader():
@@ -60,9 +60,45 @@ class Reader():
         else:
             return "no URLs found"
 
-    def clean():
-        print("in dev")
+    def clean(self):
+        pass
+        # mail = self.find_emails()
+        # links = self.find_all_links()
+        # words = word_tokenize(self.all_text.lower())
+        # cleanned = []
+        # for word in words:
+        #     if(word in mail or word in links):
+        #         continue
+        #     else:
+        #         cleanned.append(word)
+
+        # print(cleanned)
 
     def summarize(self):
+        summary = ""
         stop_words = stopwords.words("english")
-        print(stop_words)
+        words = word_tokenize(self.all_text.lower())
+        sentences = sent_tokenize(self.all_text)
+        sent_score = {}
+        freq_table = {}
+        # building frequency table
+        for word in words:
+            if(word.lower() not in stop_words):
+                if(word.lower() not in string.punctuation):
+                    if(word not in freq_table.keys()):
+                        freq_table[word] = 1
+                    else:
+                        freq_table[word] += 1
+        # devide by max
+        max_freq = max(freq_table.values())
+        for word in freq_table.keys():
+            freq_table[word] = freq_table[word]/max_freq
+        # ranking each sentence
+        for sent in sentences:
+            for word in sent:
+                if (word.lower() in freq_table.keys()):
+                    if (sent not in sent_score.keys()):
+                        sent_score[sent] = freq_table[word.lower()]
+                    else:
+                        sent_score[sent] += freq_table[word.lower()]
+        return sent_score
