@@ -5,11 +5,11 @@ import os
 import sys
 import string
 import pandas
-import numpy as np
+import re
 from PyPDF2 import PdfFileReader
 from nltk import sent_tokenize, word_tokenize
-from transformers import pipeline
-from transformers import TFAutoModelForSeq2SeqLM, AutoTokenizer
+from nltk.probability import ConditionalFreqDist
+from nltk.corpus import stopwords
 
 
 class Reader():
@@ -36,24 +36,33 @@ class Reader():
             print("[ERROR] file not found")
 
     def get_table(self, page_num):
-        pass
+        print("in dev")
 
     def extract_sentences(self):
         return sent_tokenize(self.all_text)
 
-    def find_email(self):
-        pass
+    def find_emails(self):
+        regix = "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+"
+        mail_list = []
+        email_find = re.findall(regix, self.all_text)
+        for email in email_find:
+            if(email in mail_list):
+                continue
+            else:
+                mail_list.append(email)
+        return mail_list
 
     def find_all_links(self):
-        pass
+        regix = "(http|ftp|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])"
+        links = re.findall(regix, self.all_text)
+        if links:
+            return links
+        else:
+            return "no URLs found"
+
+    def clean():
+        print("in dev")
 
     def summarize(self):
-        summary = ""
-        model = TFAutoModelForSeq2SeqLM.from_pretrained("t5-base")
-        tokenizer = AutoTokenizer.from_pretrained("t5-base")
-        summorizer = pipeline(
-            "summarization", modle=model, tokenizer=tokenizer)
-        for _, page in enumerate(self.text_on_page):
-            summary += summorizer(page, max_length=130,
-                                  min_length=30, do_sample=False)[0]['summary_text']
-        return summary
+        stop_words = stopwords.words("english")
+        print(stop_words)
