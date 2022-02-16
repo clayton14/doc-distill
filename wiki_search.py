@@ -5,9 +5,8 @@ import random
 from wikipedia import PageError
 from wikipedia import DisambiguationError
 import warnings
-# TODO : make a more well rounded web scraping tool
-# add google docs support (maybe)
-
+# TODO : fix specifice term not found loop
+# TODO : incorapate into docdistill module
 
 def search_wik(search_terms, num_sentance, output="out.txt"):
     print("======Starting======")
@@ -41,9 +40,9 @@ def search_wik(search_terms, num_sentance, output="out.txt"):
 
 
 x = [
-    "sprawl", "load bearing masonry"
+    "Prohibition in the United States"
 ]
 
 if __name__ == "__main__":
-    search_wik(x, 3, output="out.txt")
+    search_wik(x, 4, output="out.txt")
 # earch_test()

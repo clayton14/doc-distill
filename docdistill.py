@@ -34,7 +34,7 @@ title = ""
 text_on_page = []
 summary = ""
 
-
+#TODO : add web scraping support for web-docs, images, and blogs
 def read(src ):
     """
     Reads pdf file and extracts text or extrects text from websight
@@ -51,7 +51,7 @@ def read(src ):
                     all_text += page.extractText()
         except FileNotFoundError as err:
             print("[ERROR] file not found")
-    return all_text
+    return all_textall_text
 
 
 def _clean(self):
