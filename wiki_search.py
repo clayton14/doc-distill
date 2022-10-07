@@ -96,28 +96,3 @@ if __name__ == "__main__":
 
 
 
-
-
-    # opts = [opt for opt in sys.argv[1:] if opt.startswith("-")] # this looks for options
-    # args = [arg for arg in sys.argv[1:] if not arg.startswith("-")] # this ignores all args begining with '-'
-
-    # summ_len = 3
-
-    # if "-n" in opts:
-    #     summ_len = sys.argv[2]
-    #     print("len: ", summ_len)
-    # else:
-    #     pass
-
-    # if "-f" in opts:
-    #     try:
-    #         if not sys.argv[3].endswith(".txt"):
-    #             print("Incorrect file type")
-    #             print(sys.argv[3])
-    #             sys.exit(1)
-    #         else:
-    #             pass
-    #         terms = read_file(sys.argv[3])
-    #         search_wik(terms, summ_len)
-    #     except FileNotFoundError as e:
-    #         print("[ERROR] file not found")
