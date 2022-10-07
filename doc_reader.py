@@ -107,5 +107,8 @@ class Reader():
         for i in range(size):
             largest = nlargest(size, sent_score, key=sent_score.get)
             summary = ''.join(largest)
-        return summary.replace("\n", "")
-        # return freq_table
+            summary = summary.replace('\n', '')
+            best_sent = sent_tokenize(summary)
+            
+        return best_sent
+        #return summary.replace("\n", "")
