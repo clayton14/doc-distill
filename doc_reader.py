@@ -36,6 +36,20 @@ class Reader():
         except FileNotFoundError as err:
             print("[ERROR] file not found")
 
+
+    def _clean(self):
+            emails = self.find_emails()
+            links = self.find_emails()
+            for link in links:
+                self.all_text = self.all_text.replace(link, "")
+            for mail in emails:
+                self.all_text = self.all_text.replace(mail, "")
+
+    def _setup():
+        pass
+        #TODO check if nltk stuff is installed the download what is needed
+
+
     def get_table(self, page_num):
         print("in dev")
 
@@ -59,13 +73,7 @@ class Reader():
         else:
             return []
 
-    def _clean(self):
-        emails = self.find_emails()
-        links = self.find_emails()
-        for link in links:
-            self.all_text = self.all_text.replace(link, "")
-        for mail in emails:
-            self.all_text = self.all_text.replace(mail, "")
+    
 
     def summarize(self, size=3):
         self._clean()
@@ -98,6 +106,6 @@ class Reader():
 
         for i in range(size):
             largest = nlargest(size, sent_score, key=sent_score.get)
-            summary += largest[i]
+            summary = ''.join(largest)
         return summary.replace("\n", "")
         # return freq_table

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 absl-py                 
 astunparse              
 beautifulsoup4
@@ -46,3 +47,12 @@ Werkzeug
 wheel
 wikipedia
 wrapt
+=======
+PyPDF2
+pandas
+numpy
+nltk
+pyfiglet
+beautifulsoup4
+lxml
+>>>>>>> 4315ea3bb987a8950278c86cc706f8a58ec599d0
