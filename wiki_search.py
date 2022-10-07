@@ -92,7 +92,3 @@ if __name__ == "__main__":
 
     #terms = read_file("History Cold War.txt")
     #search_wik(["John Donne (poet)"] ,3)
-
-
-
-
