@@ -20,6 +20,7 @@ class Reader():
         self.title = ""
         self.text_on_page = []
         self._read()
+        
 
     def _read(self):
         """
@@ -53,7 +54,7 @@ class Reader():
     def get_table(self, page_num):
         print("in dev")
 
-    def extract_sentences(self):
+    def get_sentences(self):
         return sent_tokenize(self.all_text)
 
     def find_emails(self):
@@ -112,3 +113,11 @@ class Reader():
             
         return best_sent
         #return summary.replace("\n", "")
+
+
+    def sentiment(self):
+        print(self.extract_sentences())
+
+
+
+
